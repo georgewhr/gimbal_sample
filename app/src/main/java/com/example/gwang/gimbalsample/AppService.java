@@ -93,13 +93,18 @@ public class AppService extends Service {
             @Override
             public Collection<Communication> presentNotificationForCommunications(Collection<Communication> communications, Push push) {
                 for (Communication communication : communications) {
+
+
                     if (push.getPushType() == PushType.INSTANT) {
+                        Log.i("INFO", "georgewhr, Received an Instant PushComm message: " + communication.getTitle());
                         addEvent(new GimbalEvent(TYPE.COMMUNICATION_INSTANT_PUSH, communication.getTitle(), new Date()));
                     }
                     else {
+
+                        Log.i("INFO", "georgewhr, Received an Non-Instant PushComm message: " + communication.getTitle());
                         addEvent(new GimbalEvent(TYPE.COMMUNICATION_TIME_PUSH, communication.getTitle(), new Date()));
                     }
-                    Log.i("INFO", "Received a Push Communication with message: " + communication.getTitle());
+
                 }
 
                 // let the SDK post notifications for the communicates
