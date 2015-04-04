@@ -71,7 +71,7 @@ public class AppService extends Service {
         };
         PlaceManager.getInstance().addListener(placeEventListener);
 
-        // Setup CommunicationListener
+        // Setup CommunicationListener.
         communicationListener = new CommunicationListener() {
             @Override
             public Collection<Communication> presentNotificationForCommunications(Collection<Communication> communications, Visit visit) {
