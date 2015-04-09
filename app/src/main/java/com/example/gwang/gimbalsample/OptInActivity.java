@@ -22,9 +22,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+
+
 import com.gimbal.android.CommunicationManager;
 import com.gimbal.android.Gimbal;
 import com.gimbal.android.PlaceManager;
+
+import com.gimbal.android.BeaconEventListener;
+import com.gimbal.android.BeaconManager;
+import com.gimbal.android.BeaconSighting;
 
 public class OptInActivity extends Activity {
 
@@ -38,6 +44,7 @@ public class OptInActivity extends Activity {
         GimbalDAO.setOptInShown(getApplicationContext());
 
         PlaceManager.getInstance().startMonitoring();
+
         CommunicationManager.getInstance().startReceivingCommunications();
 
         // Setup Push Communication

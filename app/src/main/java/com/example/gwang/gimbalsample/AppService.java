@@ -29,6 +29,9 @@ import android.util.Log;
 import com.gimbal.android.Communication;
 import com.gimbal.android.CommunicationListener;
 import com.gimbal.android.CommunicationManager;
+import com.gimbal.android.BeaconEventListener;
+import com.gimbal.android.BeaconManager;
+import com.gimbal.android.BeaconSighting;
 import com.gimbal.android.Gimbal;
 import com.gimbal.android.PlaceEventListener;
 import com.gimbal.android.PlaceManager;
@@ -45,6 +48,9 @@ public class AppService extends Service {
     private PlaceEventListener placeEventListener;
     private CommunicationListener communicationListener;
     private static final String TAG = "MyActivity";
+
+    private BeaconEventListener beaconSightingListener;
+    private BeaconManager beaconManager;
 
 
     @Override
@@ -70,6 +76,28 @@ public class AppService extends Service {
             }
         };
         PlaceManager.getInstance().addListener(placeEventListener);
+
+
+
+
+
+
+        beaconSightingListener = new BeaconEventListener() {
+            @Override
+            public void onBeaconSighting(BeaconSighting sighting) {
+                Log.i("INFO", sighting.toString());
+                Log.i(TAG, "georgewhr, get beacon sighting");
+                Log.i("INFO", "RSSI value = " + sighting.getRSSI());
+                Log.i("INFO", "beacon name is " + sighting.getBeacon().getName().toString());
+            }
+        };
+        beaconManager = new BeaconManager();
+        beaconManager.addListener(beaconSightingListener);
+
+        beaconManager.startListening();
+
+
+
 
         // Setup CommunicationListener.
         communicationListener = new CommunicationListener() {
